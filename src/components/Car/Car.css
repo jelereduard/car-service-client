@@ -1,0 +1,11 @@
+.List {
+  display: inline-block;
+  text-align: center;
+  background-color: #333;
+}
+
+.Attribute {
+  color: beige;
+  font-family: sans-serif;
+  font-size: large;
+}
