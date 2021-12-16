@@ -1,5 +1,5 @@
 import React from "react";
-import "./Car.css";
+import "./Car.scss";
 
 const Car = (props) => {
   const car = (
