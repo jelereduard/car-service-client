@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Route, Switch, withRouter } from "react-router-dom";
 
 import Dashboard from "./containers/Dashboard/Dashboard";
 
@@ -6,6 +6,7 @@ import "./App.scss";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Service from "./containers/Service/Service";
+import Toolbar from "./components/Navigation/Toolbar/Toolbar";
 const App = () => {
   const toasterContainer = (
     <ToastContainer
@@ -22,21 +23,20 @@ const App = () => {
   );
 
   let routes = (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/service" element={<Service />} />
-        <Route path="*" element={<Dashboard wrongPage />} />
-      </Routes>
-    </Router>
+    <Switch>
+      <Route path="/" exact component={Dashboard} />
+      <Route path="/service/:id" exact component={Service} />
+      <Route path="*" render={() => <Dashboard wrongPage />} />
+    </Switch>
   );
 
   return (
     <div className="App">
+      <Toolbar />
       {toasterContainer}
       {routes}
     </div>
   );
 };
 
-export default App;
+export default withRouter(App);

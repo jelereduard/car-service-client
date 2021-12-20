@@ -1,7 +1,49 @@
 import React from "react";
-import { Service as CService } from "../../components/Service/Service";
-const Service = () => {
-  return <CService />;
+import { Component } from "react";
+import { connect } from "react-redux";
+
+import * as actions from "../../store/actions/index";
+import { Service as CurentService } from "../../components/Service/Service";
+import "./Service.scss";
+import Cars from "../../components/Car/Cars";
+
+class Service extends Component {
+  componentDidMount() {
+    this.props.onSelectService(localStorage.getItem("serviceId"));
+  }
+  render() {
+    const service = this.props.service ? (
+      <CurentService
+        id={this.props.service.id}
+        name={this.props.service.name}
+        noCars={this.props.service.noCars}
+        maxCapacity={this.props.service.maxCapacity}
+      />
+    ) : null;
+
+    const carList = this.props.service ? (
+      <Cars carList={this.props.service.cars} />
+    ) : null;
+
+    return (
+      <div className="Service">
+        {service}
+        {carList}
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = (state) => {
+  return {
+    service: state.service.service,
+  };
 };
 
-export default Service;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onSelectService: (id) => dispatch(actions.selectService(id)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Service);

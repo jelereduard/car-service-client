@@ -26,8 +26,8 @@ const Dashboard = (props) => {
   });
 
   return (
-    <div>
-      <h1 className="dashboard">Dashboard</h1>
+    <div className="dashboard">
+      {/* <h1 className="dashboard"></h1> */}
       <Services />
     </div>
   );
