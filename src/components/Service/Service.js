@@ -13,9 +13,10 @@ export const Service = (props) => {
   const handleShow = () => setShow(true);
   const handleSubmit = (car) => {
     axios
-      .post(baseUrl + "service/car/" + props.id, car)
+      .post(baseUrl + "service/" + props.id, car)
       .then((response) => {
         console.log(response.data);
+        document.location.reload();
       })
       .catch((error) => {
         console.log(error);

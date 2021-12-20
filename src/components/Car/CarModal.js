@@ -8,7 +8,7 @@ class CarModal extends Component {
       make: "",
       model: "",
       color: "",
-      year: 2000,
+      yearOfFabrication: 2000,
       plate: "",
     },
   };
@@ -36,7 +36,7 @@ class CarModal extends Component {
 
   onYearChange(e) {
     const updatedField = updateObject(this.state.fields, {
-      year: e.target.value,
+      yearOfFabrication: e.target.value,
     });
     this.setState({ fields: updatedField });
   }
@@ -96,7 +96,7 @@ class CarModal extends Component {
                 id="year"
                 type="number"
                 placeholder="year"
-                value={this.state.fields.year}
+                value={this.state.fields.yearOfFabrication}
                 onChange={(e) => this.onYearChange(e)}
               />
               <label htmlFor="year">Year of fabrication</label>

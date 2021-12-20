@@ -29,13 +29,14 @@ export const fetchServices = () => {
       .get(baseUrl + "service")
       .then((response) => {
         const fetchedServices = [];
+        console.log(response.data);
         for (let key in response.data) {
           fetchedServices.push({
             ...response.data[key],
-            id: parseInt(key) + 1,
+            id: parseInt(response.data[key].id),
           });
         }
-        dispatch(fetchServicesSuccess(fetchedServices));
+        dispatch(fetchServicesSuccess(fetchedServices.reverse()));
       })
       .catch((error) => {
         dispatch(fetchServicesFail(error));

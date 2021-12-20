@@ -60,9 +60,9 @@ class Services extends Component {
             {noCars}/{service.maxCapacity}
           </td>
           <td>
-            {service.cars.map((x, key) => {
+            {service.cars.map((x) => {
               return (
-                <div key={key} className="List">
+                <div key={x.id} className="List">
                   <div className="Attribute">{x.make}</div>
                   <div className="Attribute">{x.model}</div>
                   <div className="Attribute">{x.color}</div>

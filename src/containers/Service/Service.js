@@ -11,6 +11,7 @@ class Service extends Component {
   componentDidMount() {
     this.props.onSelectService(localStorage.getItem("serviceId"));
   }
+
   render() {
     const service = this.props.service ? (
       <CurentService
@@ -22,7 +23,10 @@ class Service extends Component {
     ) : null;
 
     const carList = this.props.service ? (
-      <Cars carList={this.props.service.cars} />
+      <Cars
+        serviceId={this.props.service.id}
+        carList={this.props.service.cars}
+      />
     ) : null;
 
     return (

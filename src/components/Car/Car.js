@@ -1,7 +1,19 @@
+import axios from "axios";
 import React from "react";
 import { Card, Button, Col } from "react-bootstrap";
+import { baseUrl } from "../..";
 
 const Car = (props) => {
+  const handleDelete = () => {
+    let answer = window.confirm("Delete " + props.car.plate + "?");
+    if (answer) {
+      axios.delete(
+        baseUrl + "service/" + props.serviceId + "?carId=" + props.car.id
+      );
+      document.location.reload();
+    }
+  };
+
   const color = props.car.color;
   const carCard = (
     <Col>
@@ -29,7 +41,9 @@ const Car = (props) => {
           <Button variant="outline-success" className="me-3">
             Start
           </Button>
-          <Button variant="outline-danger">Delete</Button>
+          <Button onClick={() => handleDelete()} variant="outline-danger">
+            Delete
+          </Button>
         </Card.Footer>
       </Card>
     </Col>
