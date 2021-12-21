@@ -78,7 +78,7 @@ class Services extends Component {
       <div className="body">
         <Table striped bordered hover variant="dark">
           <thead>
-            <tr>
+            <tr className="align-middle">
               <th>Location</th>
               <th>Capacity</th>
               <th>Cars</th>

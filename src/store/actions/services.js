@@ -1,5 +1,5 @@
 import axios from "axios";
-import { baseUrl } from "../..";
+import { serviceUrl } from "../..";
 
 import * as actionTypes from "./actionTypes";
 
@@ -26,7 +26,7 @@ export const fetchServicesFail = (error) => {
 export const fetchServices = () => {
   return (dispatch) => {
     axios
-      .get(baseUrl + "service")
+      .get(serviceUrl + "service")
       .then((response) => {
         const fetchedServices = [];
         console.log(response.data);

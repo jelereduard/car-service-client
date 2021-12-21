@@ -1,5 +1,5 @@
 import axios from "axios";
-import { baseUrl } from "../..";
+import { serviceUrl } from "../..";
 
 import * as actionTypes from "./actionTypes";
 
@@ -22,10 +22,11 @@ export const fetchServiceFail = (error) => {
     error: error,
   };
 };
+
 export const selectService = (id) => {
   return (dispatch) => {
     axios
-      .get(baseUrl + "service/" + id)
+      .get(serviceUrl + "service/" + id)
       .then((response) => {
         const fetchedService = response.data;
         localStorage.setItem("serviceId", fetchedService.id);

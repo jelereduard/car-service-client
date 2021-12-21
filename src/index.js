@@ -8,11 +8,13 @@ import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import App from "./App";
 import servicesReducer from "./store/reducers/services";
 import serviceReducer from "./store/reducers/service";
+import operationsReducer from "./store/reducers/operations";
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter } from "react-router-dom";
 
-export const baseUrl = "http://localhost:8080/api/";
+export const serviceUrl = "http://localhost:8080/api/";
+export const operationsUrl = "http://localhost:8081/api/";
 
 const composeEnhancers =
   process.env.NODE_ENV === "development"
@@ -22,6 +24,7 @@ const composeEnhancers =
 const rootReducer = combineReducers({
   services: servicesReducer,
   service: serviceReducer,
+  operations: operationsReducer,
 });
 
 const store = createStore(

@@ -3,7 +3,7 @@ import { Component } from "react";
 import { connect } from "react-redux";
 
 import * as actions from "../../store/actions/index";
-import { Service as CurentService } from "../../components/Service/Service";
+import CurentService from "../../components/Service/Service";
 import "./Service.scss";
 import Cars from "../../components/Car/Cars";
 
