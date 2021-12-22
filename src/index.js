@@ -9,6 +9,8 @@ import App from "./App";
 import servicesReducer from "./store/reducers/services";
 import serviceReducer from "./store/reducers/service";
 import operationsReducer from "./store/reducers/operations";
+import operationReducer from "./store/reducers/operation";
+import serviceLogReducer from "./store/reducers/serviceLog";
 import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter } from "react-router-dom";
@@ -25,6 +27,8 @@ const rootReducer = combineReducers({
   services: servicesReducer,
   service: serviceReducer,
   operations: operationsReducer,
+  serviceLog: serviceLogReducer,
+  operationList: operationReducer,
 });
 
 const store = createStore(

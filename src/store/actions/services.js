@@ -29,7 +29,6 @@ export const fetchServices = () => {
       .get(serviceUrl + "service")
       .then((response) => {
         const fetchedServices = [];
-        console.log(response.data);
         for (let key in response.data) {
           fetchedServices.push({
             ...response.data[key],

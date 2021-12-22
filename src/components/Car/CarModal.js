@@ -115,17 +115,16 @@ class CarModal extends Component {
           </Form>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={this.props.handleClose}>
-            Cancel
-          </Button>
           <Button
             variant="primary"
             onClick={() => {
-              console.log(this.state.fields);
               this.props.handleSubmit(this.state.fields);
             }}
           >
             Add Car
+          </Button>
+          <Button variant="secondary" onClick={this.props.handleClose}>
+            Cancel
           </Button>
         </Modal.Footer>
       </Modal>

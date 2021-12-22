@@ -24,7 +24,6 @@ class CurentService extends Component {
       axios
         .post(serviceUrl + "service/" + this.props.id, car)
         .then((response) => {
-          console.log(response.data);
           document.location.reload();
         })
         .catch((error) => {
