@@ -3,18 +3,17 @@ import React, { Component } from "react";
 
 import { Card, Button } from "react-bootstrap";
 import { toast } from "react-toastify";
-import { serviceUrl } from "../..";
+import { operationsUrl, serviceUrl } from "../..";
 import CarModal from "../Car/CarModal";
 
 class CurentService extends Component {
   state = {
     show: false,
+    loaded: false,
   };
 
   componentDidMount() {
-    if (this.props.noCars >= this.props.maxCapacity) {
-      toast.error("Maximum capacity reached!");
-    }
+    this.setState({ loaded: true });
   }
 
   render() {
@@ -24,6 +23,9 @@ class CurentService extends Component {
       axios
         .post(serviceUrl + "service/" + this.props.id, car)
         .then((response) => {
+          console.log(response.data);
+          const newCarId = response.data.id;
+          axios.post(operationsUrl + "log/car/" + newCarId);
           document.location.reload();
         })
         .catch((error) => {
@@ -66,6 +68,7 @@ class CurentService extends Component {
           Add Car
         </Button>
       );
+
     return (
       <Card>
         <Card.Body>

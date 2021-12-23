@@ -11,41 +11,129 @@ class CarModal extends Component {
       yearOfFabrication: 2000,
       plate: "",
     },
+    valid: {
+      validMake: false,
+      validModel: false,
+      validColor: false,
+      validYear: true,
+      validPlate: false,
+    },
+    formValidity: false,
   };
 
   onMakeChange(e) {
     const updatedField = updateObject(this.state.fields, {
       make: e.target.value,
     });
-    this.setState({ fields: updatedField });
+    this.setState({ fields: updatedField }, () => {
+      let updatedValid;
+      if (this.state.fields.make.length < 1) {
+        updatedValid = updateObject(this.state.valid, {
+          validMake: false,
+        });
+      } else {
+        updatedValid = updateObject(this.state.valid, {
+          validMake: true,
+        });
+      }
+      this.setState({ valid: updatedValid });
+      this.checkValidity();
+    });
   }
 
   onModelChange(e) {
     const updatedField = updateObject(this.state.fields, {
       model: e.target.value,
     });
-    this.setState({ fields: updatedField });
+    this.setState({ fields: updatedField }, () => {
+      let updatedValid;
+      if (this.state.fields.model.length < 1) {
+        updatedValid = updateObject(this.state.valid, {
+          validModel: false,
+        });
+      } else {
+        updatedValid = updateObject(this.state.valid, {
+          validModel: true,
+        });
+      }
+      this.setState({ valid: updatedValid });
+      this.checkValidity();
+    });
   }
 
   onColorChange(e) {
     const updatedField = updateObject(this.state.fields, {
       color: e.target.value,
     });
-    this.setState({ fields: updatedField });
+    this.setState({ fields: updatedField }, () => {
+      let updatedValid;
+      if (this.state.fields.color.length < 1) {
+        updatedValid = updateObject(this.state.valid, {
+          validColor: false,
+        });
+      } else {
+        updatedValid = updateObject(this.state.valid, {
+          validColor: true,
+        });
+      }
+      this.setState({ valid: updatedValid });
+      this.checkValidity();
+    });
   }
 
   onYearChange(e) {
     const updatedField = updateObject(this.state.fields, {
       yearOfFabrication: e.target.value,
     });
-    this.setState({ fields: updatedField });
+    this.setState({ fields: updatedField }, () => {
+      let updatedValid;
+      if (this.state.fields.yearOfFabrication < 1950) {
+        updatedValid = updateObject(this.state.valid, {
+          validYear: false,
+        });
+      } else {
+        updatedValid = updateObject(this.state.valid, {
+          validYear: true,
+        });
+      }
+      this.setState({ valid: updatedValid });
+      this.checkValidity();
+    });
   }
 
   onPlateChange(e) {
     const updatedField = updateObject(this.state.fields, {
       plate: e.target.value,
     });
-    this.setState({ fields: updatedField });
+    this.setState({ fields: updatedField }, () => {
+      let updatedValid;
+      if (this.state.fields.plate.length < 1) {
+        updatedValid = updateObject(this.state.valid, {
+          validPlate: false,
+        });
+      } else {
+        updatedValid = updateObject(this.state.valid, {
+          validPlate: true,
+        });
+      }
+      this.setState({ valid: updatedValid }, () => {
+        this.checkValidity();
+      });
+    });
+  }
+
+  checkValidity() {
+    if (
+      this.state.valid.validMake &&
+      this.state.valid.validModel &&
+      this.state.valid.validColor &&
+      this.state.valid.validYear &&
+      this.state.valid.validPlate
+    ) {
+      this.setState({ formValidity: true });
+    } else {
+      this.setState({ formValidity: false });
+    }
   }
 
   render() {
@@ -57,9 +145,13 @@ class CarModal extends Component {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
+          <Form
+            validated={!this.state.formValidity}
+            onSubmit={this.handleSubmit}
+          >
             <Form.Floating className="mb-3">
               <Form.Control
+                required
                 id="make"
                 type="text"
                 placeholder="make"
@@ -71,6 +163,7 @@ class CarModal extends Component {
             </Form.Floating>
             <Form.Floating className="mb-3">
               <Form.Control
+                required
                 id="model"
                 type="text"
                 placeholder="model"
@@ -82,6 +175,7 @@ class CarModal extends Component {
             </Form.Floating>
             <Form.Floating className="mb-3">
               <Form.Control
+                required
                 id="color"
                 type="text"
                 placeholder="color"
@@ -93,6 +187,7 @@ class CarModal extends Component {
             </Form.Floating>
             <Form.Floating className="mb-3">
               <Form.Control
+                required
                 id="year"
                 type="number"
                 placeholder="year"
@@ -103,6 +198,7 @@ class CarModal extends Component {
             </Form.Floating>
             <Form.Floating className="mb-3">
               <Form.Control
+                required
                 id="plate"
                 type="text"
                 placeholder="plate number"
@@ -116,10 +212,16 @@ class CarModal extends Component {
         </Modal.Body>
         <Modal.Footer>
           <Button
+            onClick={() =>
+              console.log(this.state.formValidity, this.state.valid)
+            }
+          >
+            valid?
+          </Button>
+          <Button
             variant="primary"
-            onClick={() => {
-              this.props.handleSubmit(this.state.fields);
-            }}
+            disabled={this.state.formValidity ? false : true}
+            onClick={() => this.props.handleSubmit(this.state.fields)}
           >
             Add Car
           </Button>
